@@ -2,23 +2,21 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
 
 	public MainPage()
 	{
 		InitializeComponent();
 	}
+    void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
+    {
+        valueLabel.Text = args.NewValue.ToString("F3");
+    }
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+    async void OnButtonClicked(object sender, EventArgs args)
+    {
+        Button button = (Button)sender;
+        await DisplayAlert("Clicked!", "The button labeled '" + button.Text + "' has been clicked", "OK");
+    }
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
 }
 
